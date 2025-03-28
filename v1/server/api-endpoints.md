@@ -1,14 +1,14 @@
 # Auth Router - /auth
 
 ## POST /auth/signup (signup)
-input
+request.body
 ```json
 {
   "user": "string",
   "password": "string"
 }
 ```
-output
+response.json()
 ```json
 {
   "msg": "string" // operation status report
@@ -16,14 +16,14 @@ output
 ```
 
 ## POST /auth/login (login)
-input
+request.body
 ```json
 {
   "user": "string",
   "password": "string"
 }
 ```
-output
+response.json()
 ```json
 {
   "token": "string",
@@ -32,11 +32,11 @@ output
 ```
 
 ## POST /auth/logout (verifyJWT, logout)
-input
+request.body
 ```json
 {}
 ```
-output
+response.json()
 ```json
 {
   "msg": "string" // operation status report
@@ -46,14 +46,14 @@ output
 # Cart Router - /cart
 
 ## POST /cart (verifyJWT, addToCart)
-input
+request.body
 ```json
 {
   "product_code": "string",
   "count": "integer"
 }
 ```
-output
+response.json()
 ```json
 {
   "msg": "string" // operation status report
@@ -61,11 +61,11 @@ output
 ```
 
 ## GET /cart (verifyJWT, showCart)
-input
+request.body
 ```json
 {}
 ```
-output
+response.json()
 ```json
 [
   {
@@ -77,14 +77,14 @@ output
 ```
 
 ## PUT /cart (verifyJWT, modifyItemCount)
-input
+request.body
 ```json
 {
   "id": "string",
   "count": "integer"
 }
 ```
-output
+response.json()
 ```json
 {
   "msg": "string" // operation status report
@@ -92,13 +92,13 @@ output
 ```
 
 ## DELETE /cart (verifyJWT, deleteItem)
-input
+request.body
 ```json
 {
   "product_code": "string"
 }
 ```
-output
+response.json()
 ```json
 {
   "msg": "string" // operation status report
@@ -106,11 +106,11 @@ output
 ```
 
 ## GET /cart/placeorder (verifyJWT, placeOrder)
-input
+request.body
 ```json
 {}
 ```
-output
+response.json()
 ```json
 {
   "msg": "string" // operation status report
@@ -120,11 +120,11 @@ output
 # Netmeds Router - /search
 
 ## GET /search/:query (searchProducts)
-input
+request.body
 ```json
 {}
 ```
-output
+response.json()
 ```json
 {
   "products": [
@@ -140,11 +140,11 @@ output
 ```
 
 ## GET /search/id/:product_code (getProduct)
-input
+request.body
 ```json
 {}
 ```
-output
+response.json()
 ```json
 {
   "product_code": "string",
@@ -157,11 +157,11 @@ output
 # Notification Router - /notifications
 
 ## GET /notifications (verifyJWT, getNotifications)
-input
+request.body
 ```json
 {}
 ```
-output
+response.json()
 ```json
 [
   "string"
@@ -171,13 +171,13 @@ output
 # Wishlist Router - /wishlist
 
 ## POST /wishlist (verifyJWT, addToWishlist)
-input
+request.body
 ```json
 {
   "product_code": "string"
 }
 ```
-output
+response.json()
 ```json
 {
   "msg": "string" // operation status report
@@ -185,11 +185,11 @@ output
 ```
 
 ## GET /wishlist (verifyJWT, fetchWishlist)
-input
+request.body
 ```json
 {}
 ```
-output
+response.json()
 ```json
 [
   {
@@ -201,13 +201,13 @@ output
 ```
 
 ## DELETE /wishlist (verifyJWT, removeFromWishlist)
-input
+request.body
 ```json
 {
   "item": "string"
 }
 ```
-output
+response.json()
 ```json
 {
   "msg": "string" // operation status report
