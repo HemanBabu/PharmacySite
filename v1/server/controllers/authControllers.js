@@ -1,7 +1,7 @@
 const userModel = require("../models/userModel.js");
+const userDataModel = require("../models/userDataModel.js");
 const invalidTokensModel = require("../models/invalidTokensModel.js");
 const jwt = require("jsonwebtoken");
-const verifyJWT = require("../middlewares/verifyJWT.js");
 
 async function signup(req, res){
     if(await userModel.exists({user : req.user})){
@@ -16,8 +16,16 @@ async function signup(req, res){
         res.status(401).json({
             msg : "failed creating user"
         });
-        console.log(e);
         return;
+    }
+    try{
+        await userDataModel.create({user : req.body.user});
+    } catch(e){
+        await userModel.findOneAndDelete({user : req.body.user, password : req.body.password});
+        console.log(e);
+        res.status(401).json({
+            msg : "failed creating user"
+        });
     }
     res.status(200).json({
         msg : "user created"

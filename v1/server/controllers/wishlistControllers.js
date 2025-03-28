@@ -1,11 +1,45 @@
-function addToWishlist(req, res){
+const mongoose = require("mongoose");
+const userDataModel = require("../models/userDataModel.js")
 
+async function addToWishlist(req, res){
+    try{
+        await userDataModel.updateOne(
+            {user : req.user},
+            { $push : {wishlist : req.body.item}}
+        );
+        return res.status(200).json({
+            msg : "added to wishlist"
+        });
+    } catch(e){
+        return res.status(401).json({
+            msg : "cant add to wishlist"
+        });
+    }
 }
-function fetchWishlist(req, res){
-
+async function fetchWishlist(req, res){
+    try{
+        const {wishlist} = await userDataModel.findOne( {user : req.user});
+        return res.status(200).json(wishlist); 
+    } catch(e){
+        return res.status(401).json({
+            msg : "cant fetch wishlist"
+        });
+    }
 }
-function removeFromWishlist(req, res){
-
+async function removeFromWishlist(req, res){
+    try{
+        await userDataModel.updateOne(
+            {user : req.user},
+            {$pull : {wishlist : req.body.item}}
+        );
+        return res.status(200).json({
+            msg : "removed from wishlist"
+        });
+    } catch(e){
+        return res.status(401).json({
+            msg : "cant remove from wishlist"
+        })
+    }
 }
 
 module.exports = {addToWishlist,fetchWishlist,removeFromWishlist};

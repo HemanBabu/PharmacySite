@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const {searchProduct, getProduct} = require("../controllers/netmedsControllers.js");
+const {searchProducts, getProduct} = require("../controllers/netmedsControllers.js");
 
 router
-.get("/:query", searchProduct)
+.get("/:query", searchProducts)
 .get("/id/:id", getProduct);
 
 module.exports = router;

@@ -7,8 +7,8 @@ const router = express.Router();
 router
 .post("/", verifyJWT, addToCart)
 .get("/", verifyJWT, showCart)
-.put("/:id", verifyJWT, modifyItemCount)
-.delete("/:id", verifyJWT, deleteItem)
-.post("/placeorder", verifyJWT, placeOrder);
+.put("/", verifyJWT, modifyItemCount)
+.delete("/", verifyJWT, deleteItem)
+.get("/placeorder", verifyJWT, placeOrder);
 
 module.exports = router;

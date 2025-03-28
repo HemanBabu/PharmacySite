@@ -6,8 +6,9 @@ const userDataSchema = new mongoose.Schema({
         unique: true
     },
     cart : {
-        type : [String], 
-        default : []
+        type : Map,
+        of : Number,
+        default : {}
     },
     wishlist : {
         type : [String], 
@@ -18,8 +19,11 @@ const userDataSchema = new mongoose.Schema({
             title : String,
             body : String
         }],
-        default : []
+        default : [{
+            title : "Welcome",
+            body : "Get any medicine on doorsteps"
+        }]
     }
 });
 
-modules.export = new mongoose.model("user-data", userDataSchema);
+module.exports = new mongoose.model("user-data", userDataSchema);

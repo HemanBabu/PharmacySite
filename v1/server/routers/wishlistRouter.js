@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {} = require("../controllers/wishlistRouter.js");
+const {addToWishlist, fetchWishlist, removeFromWishlist} = require("../controllers/wishlistControllers.js");
 const verifyJWT = require("../middlewares/verifyJWT.js");
 
 router
