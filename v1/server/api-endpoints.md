@@ -34,9 +34,7 @@ output
 ## POST /auth/logout (verifyJWT, logout)
 input
 ```json
-{
-  "token": "string"
-}
+{}
 ```
 output
 ```json
@@ -64,7 +62,9 @@ output
 
 ## GET /cart (verifyJWT, showCart)
 input
-None
+```json
+{}
+```
 output
 ```json
 [
@@ -107,7 +107,9 @@ output
 
 ## GET /cart/placeorder (verifyJWT, placeOrder)
 input
-None
+```json
+{}
+```
 output
 ```json
 {
@@ -119,7 +121,9 @@ output
 
 ## GET /search/:query (searchProducts)
 input
-None
+```json
+{}
+```
 output
 ```json
 {
@@ -137,7 +141,9 @@ output
 
 ## GET /search/id/:product_code (getProduct)
 input
-None
+```json
+{}
+```
 output
 ```json
 {
@@ -152,7 +158,9 @@ output
 
 ## GET /notifications (verifyJWT, getNotifications)
 input
-None
+```json
+{}
+```
 output
 ```json
 [
@@ -178,7 +186,9 @@ output
 
 ## GET /wishlist (verifyJWT, fetchWishlist)
 input
-None
+```json
+{}
+```
 output
 ```json
 [
@@ -203,4 +213,3 @@ output
   "msg": "string" // operation status report
 }
 ```
-
