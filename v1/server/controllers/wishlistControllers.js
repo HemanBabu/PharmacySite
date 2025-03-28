@@ -39,7 +39,7 @@ async function removeFromWishlist(req, res){
     try{
         await userDataModel.updateOne(
             {user : req.user},
-            {$pull : {wishlist : req.body.item}}
+            {$pull : {wishlist : req.body.product_code}}
         );
         return res.status(200).json({
             msg : "removed from wishlist"

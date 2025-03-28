@@ -63,7 +63,7 @@ async function logout(req, res){
         return;
     }
     try{
-        await invalidTokensModel.create({token : req.token});
+        await invalidTokensModel.create({token : req.body.token});
         res.status(200).json({
             msg : "logged out"
         })
