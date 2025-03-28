@@ -3,7 +3,7 @@ async function addToCart(req, res){
     try{
         const data = await userDataModel.updateOne(
             {user : req.user},
-            {$set : { [`cart.${req.body.id}`] : req.body.count}}
+            {$set : { [`cart.${req.body.product_code}`] : req.body.count}}
         );
         return res.status(200).json({
             msg : 'added to cart'
@@ -16,8 +16,15 @@ async function addToCart(req, res){
 }
 async function showCart(req, res){
     try{
-        const data = await userDataModel.findOne({user : req.user});
-        res.status(200).json(data.cart);
+        const userData = await userDataModel.findOne({user : req.user});
+        const fetchProductsFromCache = require("../helper/fetchProductsFromCache.js");
+        const inCartProducts = await fetchProductsFromCache(...userData.cart.keys());
+        const counts = Array.from(userData.cart.values());
+        for(let i=0; i<inCartProducts.length; i++){
+            if(inCartProducts[i].toObject) inCartProducts[i] = inCartProducts[i].toObject();
+            inCartProducts[i].count = counts[i];
+        }
+        res.status(200).json(inCartProducts);
         return;
     } catch(e){
         console.log(e);
@@ -48,7 +55,7 @@ async function deleteItem(req, res){
     try{
         const data = await userDataModel.updateOne(
             {user : req.user},
-            {$unset : {[`cart.${req.body.id}`] : ""}}
+            {$unset : {[`cart.${req.body.product_code}`] : ""}}
         );
         res.status(200).json({
             msg : "deleted item"

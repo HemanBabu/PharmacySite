@@ -2,10 +2,16 @@ const mongoose = require("mongoose");
 const userDataModel = require("../models/userDataModel.js")
 
 async function addToWishlist(req, res){
+    const userData = await userDataModel.findOne({user : req.user});
+    if(userData.wishlist.includes(req.body.product_code)){
+        return res.status(200).json({
+            msg : "already in wishlist"
+        });
+    }
     try{
         await userDataModel.updateOne(
             {user : req.user},
-            { $push : {wishlist : req.body.item}}
+            { $push : {wishlist : req.body.product_code}}
         );
         return res.status(200).json({
             msg : "added to wishlist"
@@ -19,8 +25,11 @@ async function addToWishlist(req, res){
 async function fetchWishlist(req, res){
     try{
         const {wishlist} = await userDataModel.findOne( {user : req.user});
-        return res.status(200).json(wishlist); 
+        const fetchProductsFromCache = require("../helper/fetchProductsFromCache.js");
+        const products = await fetchProductsFromCache(...wishlist);
+        return res.status(200).json(products); 
     } catch(e){
+        console.log(e);
         return res.status(401).json({
             msg : "cant fetch wishlist"
         });

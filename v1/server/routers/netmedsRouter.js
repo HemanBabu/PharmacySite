@@ -5,6 +5,6 @@ const {searchProducts, getProduct} = require("../controllers/netmedsControllers.
 
 router
 .get("/:query", searchProducts)
-.get("/id/:id", getProduct);
+.get("/id/:product_code", getProduct);
 
 module.exports = router;
