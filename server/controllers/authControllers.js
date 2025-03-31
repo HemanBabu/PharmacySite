@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 
 async function signup(req, res){
     if(await userModel.exists({user : req.user})){
+        console.log(e);
         res.status(401).json({
             msg : "user already exists"
         });
@@ -13,6 +14,7 @@ async function signup(req, res){
     try{
         await userModel.create({user : req.body.user, password : req.body.password});
     } catch(e){
+        console.log(e);
         res.status(401).json({
             msg : "failed creating user"
         });
@@ -56,14 +58,15 @@ async function login(req, res){
     }
 }
 async function logout(req, res){
-    if(await(invalidTokensModel.exists({token : req.body.token}))){
+    if(await(invalidTokensModel.exists({token : req.token}))){
+        console.log("Token already exists");
         res.status(401).json({
             msg : "already logged out"
         });
         return;
     }
     try{
-        await invalidTokensModel.create({token : req.body.token});
+        await invalidTokensModel.create({token : req.token});
         res.status(200).json({
             msg : "logged out"
         })

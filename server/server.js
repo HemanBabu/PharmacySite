@@ -6,6 +6,7 @@ const wishlistRouter = require("./routers/wishlistRouter.js");
 const cartRouter = require("./routers/cartRouter.js");
 const notificationRouter = require("./routers/notificationRouter.js");
 const app = express();
+const cors = require("cors");
 
 require("dotenv").config();
 console.log(process.env.JWT_SECRET);
@@ -20,6 +21,7 @@ async function connectDB(){
 }
 connectDB();
 
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 
 app.use("/auth", authRouter);

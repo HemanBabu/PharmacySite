@@ -23,6 +23,7 @@ async function verifyJWT(req, res, next){
         req.token = token;
         next();
     }catch(e){
+        console.log(e);
         res.status(401).json({
             msg : e.message
         });
