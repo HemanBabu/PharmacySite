@@ -4,7 +4,7 @@ async function verifyJWT(req, res, next){
     const authHeader = req.headers["authorization"];
     if(!authHeader){
         res.status(401).json({
-            message : "pls provide bearer token"
+            msg : "pls provide bearer token"
         });
         return;
     }
@@ -13,7 +13,7 @@ async function verifyJWT(req, res, next){
 //    console.log(token);
     if(await invalidTokensModel.exists({token})){
         res.status(401).json({
-            message : "not logged in"
+            msg : "not logged in"
         });
         return;
     }
@@ -24,7 +24,7 @@ async function verifyJWT(req, res, next){
         next();
     }catch(e){
         res.status(401).json({
-            message : e.message
+            msg : e.message
         });
         return;
     }
