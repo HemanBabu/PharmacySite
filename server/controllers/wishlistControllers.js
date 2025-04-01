@@ -26,7 +26,8 @@ async function fetchWishlist(req, res){
     try{
         const {wishlist} = await userDataModel.findOne( {user : req.user});
         const fetchProductsFromCache = require("../helper/fetchProductsFromCache.js");
-        const products = await fetchProductsFromCache(...wishlist);
+        const products = await fetchProductsFromCache(req.user, ...wishlist);
+//        console.log(products);
         return res.status(200).json(products); 
     } catch(e){
         console.log(e);

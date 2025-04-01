@@ -24,7 +24,9 @@ export default function Products({ jwtToken, search }) {
         }
 
         const data = await response.json();
+        console.log(data);
         setProducts(data.products);
+        setError(null);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -51,6 +53,9 @@ export default function Products({ jwtToken, search }) {
           selling_price={product.selling_price}
           image_url={product.image_url}
           categories={product.categories}
+          in_cart={product.count}
+          in_wishlist={product.wished}
+          jwtToken={jwtToken}
         />
       ))}
     </CardHolder>

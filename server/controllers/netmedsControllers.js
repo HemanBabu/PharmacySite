@@ -1,5 +1,6 @@
 const productModel = require("../models/productModel.js");
 const cacheProducts = require("../helper/cacheProducts.js");
+const userDataModel = require("../models/userDataModel.js");
 async function searchProducts(req, res) {
     try{
         const response = await fetch("https://0z9q3se3dl-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(3.33.0)%3B%20Browser%3B%20instantsearch.js%20(4.49.1)%3B%20JS%20Helper%20(3.11.1)&x-algolia-application-id=0Z9Q3SE3DL&x-algolia-api-key=daff858f97cc3361e1a3f722e3729753",
@@ -20,15 +21,21 @@ async function searchProducts(req, res) {
 
         data = data.results[0].hits;
         const result = {};
-        result.products = data.map(product => {
+        result.products = await Promise.all(data.map(async (product) => {
             const obj = {};
             for(const key of sieve){
                 obj[key] = product[key];
             }
+            obj["image_url"] = "https://netmeds.com/"+obj["image_url"];
+            obj["thumbnail_url"] = "https://netmeds.com/"+obj["thumbnail_url"];
             return obj;
-        });
+        }));
         await cacheProducts(...result.products);
         result.length = result.products.length;
+        if(req.token){
+            const userSpecialize = require("../helper/userSpecialize.js");
+            result.products = await userSpecialize(req.user, result.products);
+        }
         return res.status(200).json(result);
     } catch (e){
         console.log(e);
@@ -39,13 +46,13 @@ async function searchProducts(req, res) {
 }
 async function getProduct(req, res) {
     const fetchProductsFromCache = require("../helper/fetchProductsFromCache.js");
-    const products = await fetchProductsFromCache(req.params.product_code);
+    const products = await fetchProductsFromCache(req.token, req.params.product_code);
     if(products[0]==-1){
         return res.status(401).json({
             msg : "no such product"
         });
     }
-    console.log(products);
+//    console.log(products);
     return res.status(200).json(products[0]);
 }
 module.exports = { searchProducts, getProduct };

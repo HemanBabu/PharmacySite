@@ -17,18 +17,18 @@ function App() {
   const [search, setSearch] = useState("");
   return <>
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link className="navbar-brand" to="/Home">Navbar</Link>
+      <Link className="navbar-brand" to="/Home">Pharmacy site</Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
 
       <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <form className="d-flex ms-auto">
+        <form className="d-flex ms-auto" onSubmit={(e)=>{e.preventDefault()}}>
           <input className="form-control mr-sm-2" onChange={(e)=>{
             setSearch(e.target.value);
           }}
           type="search" placeholder="Search" />
-            <Link className="btn btn-outline-success my-2 my-sm-0" to="/products">Search</Link>
+            <Link type="submit" className="btn btn-outline-success my-2 my-sm-0" to="/products">Search</Link>
         </form>
         <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
           {jwtToken ? (

@@ -19,10 +19,16 @@ async function verifyJWT(req, res, next){
     }
     try{
         const payload = jwt.verify(token, JWT_SECRET);
+    /*
+        console.log("USER PAYLOAD S");
+        console.log(payload.user);
+        console.log("USER PAYLOAD E");
+        */
         req.user = payload.user;
         req.token = token;
         next();
     }catch(e){
+        console.log(token);
         console.log(e);
         res.status(401).json({
             msg : e.message

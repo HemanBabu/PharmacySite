@@ -18,12 +18,14 @@ async function showCart(req, res){
     try{
         const userData = await userDataModel.findOne({user : req.user});
         const fetchProductsFromCache = require("../helper/fetchProductsFromCache.js");
-        const inCartProducts = await fetchProductsFromCache(...userData.cart.keys());
+        const inCartProducts = await fetchProductsFromCache(req.user, ...userData.cart.keys());
         const counts = Array.from(userData.cart.values());
         for(let i=0; i<inCartProducts.length; i++){
             if(inCartProducts[i].toObject) inCartProducts[i] = inCartProducts[i].toObject();
             inCartProducts[i].count = counts[i];
         }
+        console.log("---CART---");
+        console.log(inCartProducts);
         res.status(200).json(inCartProducts);
         return;
     } catch(e){
@@ -69,6 +71,7 @@ async function deleteItem(req, res){
     }
 }
 async function placeOrder(req, res){
+    console.log("placing order");
     try{
         const data = await userDataModel.updateOne(
             {user : req.user},
