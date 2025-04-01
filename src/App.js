@@ -24,11 +24,11 @@ function App() {
 
       <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
         <form className="d-flex ms-auto" onSubmit={(e)=>{e.preventDefault()}}>
-          <input className="form-control mr-sm-2" onChange={(e)=>{
+          <input onChange={(e)=>{
             setSearch(e.target.value);
           }}
           type="search" placeholder="Search" />
-            <Link type="submit" className="btn btn-outline-success my-2 my-sm-0" to="/products">Search</Link>
+            <Link type="submit" class="btn" to="/products">Search</Link>
         </form>
         <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
           {jwtToken ? (

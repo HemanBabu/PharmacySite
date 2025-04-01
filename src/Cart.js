@@ -1,3 +1,4 @@
+import "./Cart.css"
 import {useEffect, useState} from 'react';
 export default function Cart({jwtToken}){
   const [products, setProducts] = useState([]);
@@ -22,9 +23,9 @@ export default function Cart({jwtToken}){
   }, []);
 
   return (
-  <div>
-    <h2>Shopping Cart</h2>
-    <table>
+  <div class="container" id="root">
+    <h2 class="p-2 text-center">Shopping Cart</h2>
+    <table class="mx-auto">
       <thead>
         <tr>
           <th>Image</th>
@@ -51,10 +52,12 @@ export default function Cart({jwtToken}){
         <tr>
           <td colSpan="3">Total:</td>
           <td>
-            ${products.reduce((total, product) => total + product.selling_price * product.count, 0)}
+            ${products.reduce((total, product) => {
+  return total + product.selling_price * product.count;
+}, 0).toFixed(2)}
           </td>
           <td>
-            <button onClick={() => console.log("Order Placed")}>Place Order</button>
+            <button className="place-order" onClick={() => console.log("Order Placed")}>Place Order</button>
           </td>
         </tr>
       </tfoot>

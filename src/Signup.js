@@ -46,14 +46,22 @@ export default function Signup({ setJwtToken, setUser }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: "400px", margin: "auto" }}>
+    <div className="container login-panel">
+    <form className="mx-auto" onSubmit={handleSubmit} >
+      <label>Username :</label>
       <input type="text" placeholder="Username" value={user} onChange={(e) => setUsername(e.target.value)} required />
+      <label>Password :</label>
       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+      <label>Confirm Password :</label>
       <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+      <label>Email :</label>
       <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+      <label>Phone Number :</label>
       <input type="text" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+      <label>Location :</label>
       <textarea placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)}></textarea>
       <button type="submit" disabled={!isFormValid}>Sign Up</button>
     </form>
+  </div>
   );
 }

@@ -1,0 +1,24 @@
+th{
+  padding:10px;
+}
+
+td{
+  padding:5px;
+  padding-top:15px;
+}
+
+tr{
+  border-bottom:1px solid black;
+  text-align:center;
+}
+
+.place-order{
+  padding:10px;
+  border-radius:5px;
+  border:none;
+  background:#8f6;
+
+}
+.place-order:active{
+  background:lightgreen;
+}
