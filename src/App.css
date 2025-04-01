@@ -2,10 +2,10 @@
   text-decoration:none;
   color:white;
 }
-.nav-logo{
-  position:absolute;
-  top:15px;
-  left:15px;
+.nav-brand{
+  font-size:2rem;
+  font-weight:light;
+  font-family:sans;
 }
 .nav{
   display:flex;

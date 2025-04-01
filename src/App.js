@@ -10,7 +10,7 @@ import NotFound from "./NotFound.js";
 import Login from "./Login.js";
 import Logout from "./Logout.js";
 import Signup from "./Signup.js";
-import { FaReact, FaHome, FaSearch, FaShoppingCart, FaHeart, FaBell } from "react-icons/fa";
+import { FaReact, FaHome, FaSearch, FaShoppingCart, FaHeart, FaBell, FaCapsules } from "react-icons/fa";
 import { GrLogin, GrLogout} from "react-icons/gr";
 import { GiArchiveRegister } from "react-icons/gi";
 
@@ -21,7 +21,7 @@ function App() {
   const [search, setSearch] = useState("");
   return <>
     <nav className="nav">
-      <Link className="nav-brand" to="/Home"><img class="nav-logo" src={logo} alt="+Pharmacy" height={"40px"}/>-----Pharmacy</Link>
+      <Link className="nav-brand" to="/Home"><FaCapsules /> Pharmacy</Link>
 
       <div className="nav-complement">
         <form className="" onSubmit={(e)=>{e.preventDefault()}}>
