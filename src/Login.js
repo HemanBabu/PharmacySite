@@ -39,9 +39,9 @@ export default function Login({ setJwtToken, setUser }) {
   };
 
   return (
-    <div className="container login-panel">
+    <div className="login-panel">
       {error && <p>Couldn't login</p>}
-      <form className="mx-auto" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label>Username :</label>
         <input
           type="text"
