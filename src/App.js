@@ -6,7 +6,6 @@ import Cart from "./Cart.js";
 import Wishlist from "./Wishlist.js";
 import Notifications from "./Notifications.js";
 import Products from "./Products.js";
-import NotFound from "./NotFound.js";
 import Login from "./Login.js";
 import Logout from "./Logout.js";
 import Signup from "./Signup.js";
@@ -112,7 +111,7 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
         </>
       )}
-      <Route path="*" element={<NotFound />}></Route>
+      <Route path="*" element={<Home />}></Route>
     </Routes>
   </>
 }
