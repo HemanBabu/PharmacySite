@@ -22,11 +22,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "frontend": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "devserver": "cd server && nodemon server.js"
+    "backend": "cd server && nodemon server.js"
   },
   "eslintConfig": {
     "extends": [

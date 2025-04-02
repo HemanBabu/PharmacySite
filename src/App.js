@@ -10,7 +10,7 @@ import NotFound from "./NotFound.js";
 import Login from "./Login.js";
 import Logout from "./Logout.js";
 import Signup from "./Signup.js";
-import { FaReact, FaHome, FaSearch, FaShoppingCart, FaHeart, FaBell, FaCapsules } from "react-icons/fa";
+import { FaHome, FaSearch, FaShoppingCart, FaHeart, FaBell, FaCapsules } from "react-icons/fa";
 import { GrLogin, GrLogout} from "react-icons/gr";
 import { GiArchiveRegister } from "react-icons/gi";
 

@@ -1,3 +1,4 @@
+import "./Notifications.css";
 import {useEffect, useState} from "react";
 export default function Notifications({jwtToken}){
   const [notifications, setNotifications] = useState([]);
@@ -16,10 +17,14 @@ export default function Notifications({jwtToken}){
     });
   }, []);
   return <>
+  <div className="notifications">
     <h1>Notifications</h1>
-    {notifications.map(notification => <div>
+    <div>
+    {notifications.map(notification => <div className="notification-plate">
       <h2>{notification.title}</h2>
       <p>{notification.body}</p>
     </div>)}
+    </div>
+  </div>
   </>
 }

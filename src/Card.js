@@ -1,3 +1,4 @@
+import {BsCartDashFill, BsCartPlusFill} from "react-icons/bs";
 import {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 export default function Card({ product_code, display_name, manufacturer_name, mrp, selling_price, image_url, categories, in_cart, in_wishlist, jwtToken}) {
@@ -35,6 +36,12 @@ export default function Card({ product_code, display_name, manufacturer_name, mr
   function toggleWish(){
     setIsWished(!isWished);
   }
+  function addToCart(){
+    setInCart(inCart+1);
+  }
+  function removeFromCart(){
+    setInCart(inCart==0 ? 0 : inCart-1);
+  }
   return (
     <div style={styles.card}>
       <img src={image_url} alt={display_name} style={styles.image} />
@@ -47,12 +54,15 @@ export default function Card({ product_code, display_name, manufacturer_name, mr
         <div>
             <div style={styles.floatLeft}><button onClick={toggleWish}> {isWished ? " ❤️ " : " 🤍 "}</button></div>
             <div style={styles.floatRight}>
-              <strong> 🛒 </strong>: 
-              <input type={"number"}
-               value={inCart}
+
+              <BsCartDashFill onClick={removeFromCart}/>
+
+              <input className="cart-input"
+               value={inCart} disabled
                onChange={(e)=>{
                 setInCart(e.target.value);
                }}></input>
+              <BsCartPlusFill onClick={addToCart} />
               </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 export default function Cart({jwtToken}){
   const [products, setProducts] = useState([]);
 
-  useEffect(()=>{
+  function fetchProducts(){
     fetch("http://localhost:3001/cart",{
       method : "GET",
       headers : {
@@ -20,19 +20,30 @@ export default function Cart({jwtToken}){
       );
     })
     .catch(e => console.log(e));
+  }
+  function placeOrder(){
+    fetch("http://localhost:3001/cart/placeorder",{
+      method : "GET",
+      headers : {
+        "Content-Type" : "application/json",
+        "Authorization" : `Bearer ${jwtToken}`
+      }
+    }).then(fetchProducts);
+  }
+  useEffect(()=>{
+    fetchProducts();
   }, []);
 
   return (
-  <div class="container" id="root">
-    <h2 class="p-2 text-center">Shopping Cart</h2>
-    <table class="mx-auto">
+  <div class="cart-container">
+    <h2>Shopping Cart</h2>
+    <table>
       <thead>
         <tr>
-          <th>Image</th>
-          <th>Product</th>
+          <th colspan="2">Name</th>
           <th>MRP</th>
           <th>Selling Price</th>
-          <th>Count</th>
+          <th>Quantity</th>
         </tr>
       </thead>
       <tbody>
@@ -42,9 +53,9 @@ export default function Cart({jwtToken}){
               <img src={product.thumbnail_url} alt={product.display_name} width="50" height="50" />
             </td>
             <td>{product.display_name}</td>
-            <td>${product.mrp}</td>
-            <td>${product.selling_price}</td>
-            <td>{product.count}</td>
+            <td>₹{product.mrp}</td>
+            <td>₹{product.selling_price}</td>
+            <td>x{product.count}</td>
           </tr>
         ))}
       </tbody>
@@ -57,7 +68,7 @@ export default function Cart({jwtToken}){
 }, 0).toFixed(2)}
           </td>
           <td>
-            <button className="place-order" onClick={() => console.log("Order Placed")}>Place Order</button>
+            <button className="place-order" onClick={placeOrder}>Place Order</button>
           </td>
         </tr>
       </tfoot>
