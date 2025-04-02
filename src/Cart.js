@@ -40,7 +40,7 @@ export default function Cart({jwtToken}){
     <table>
       <thead>
         <tr>
-          <th colspan="2">Name</th>
+          <th colSpan="2">Name</th>
           <th>MRP</th>
           <th>Selling Price</th>
           <th>Quantity</th>

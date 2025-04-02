@@ -1,6 +1,6 @@
 import './App.css';
 import logo from "./logo.png";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Home from "./Home.js";
 import Cart from "./Cart.js";
 import Wishlist from "./Wishlist.js";
@@ -14,57 +14,80 @@ import { FaHome, FaSearch, FaShoppingCart, FaHeart, FaBell, FaCapsules } from "r
 import { GrLogin, GrLogout} from "react-icons/gr";
 import { GiArchiveRegister } from "react-icons/gi";
 
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 function App() {
   const [jwtToken, setJwtToken] = useState(null);
   const [user, setUser] = useState("");
   const [search, setSearch] = useState("");
+  const navigator = new useNavigate();
   return <>
     <nav className="nav">
-      <Link className="nav-brand" to="/Home"><FaCapsules /> Pharmacy</Link>
+      <Link className="nav-brand" to="/Home"><FaCapsules /> <span>Pharmacy</span></Link>
 
       <div className="nav-complement">
-        <form className="" onSubmit={(e)=>{e.preventDefault()}}>
-          <input onChange={(e)=>{
+        <form className="" onSubmit={(e)=>{e.preventDefault();
+          if(!document.location.href.includes("/products")) navigator("/products");
+          if(e.target.searchInput.value=="") navigator("/");
+          else navigator("/products");
+          setSearch(e.target.searchBtn.value) 
+          }}>
+          <input name="searchInput" className="searchInput" onChange={(e)=>{
+          if(e.target.value=="") navigator("/");
+          else navigator("/products");
             setSearch(e.target.value);
           }}
           type="search" placeholder="Search" />
-            <Link type="submit" className="" to="/products"><FaSearch /></Link>
+            <Link type="submit" className="searchBtn" to="/products"><FaSearch /></Link>
         </form>
 
         <ul className="nav-item-list">
           <li className="nav-item">
+            <Link className="nav-link" to="/">
             <FaHome /> 
-            <Link className="nav-link" to="/">Home</Link>
+            <span>Home</span>
+            </Link>
           </li>
           {jwtToken ? (
             <>
           <li className="nav-item">
+            
+            <Link className="nav-link" to="/cart">
             <FaShoppingCart />
-            <Link className="nav-link" to="/cart">Cart</Link>
+            <span>Cart</span>
+            </Link>
           </li>
           <li className="nav-item">
-            <FaHeart />
-            <Link className="" to="/wishlist">Wishlist</Link>
+            <Link className="nav-link" to="/wishlist">
+          <FaHeart />
+            <span>Wishlist</span>
+            </Link>
           </li>
           <li className="nav-item">
+            <Link className="nav-link" to="/notifications">
             <FaBell />
-            <Link className="" to="/notifications">Notifications</Link>
+            <span>Notifications</span>
+            </Link>
           </li>
           <li className="nav-item">
+            <Link className="nav-link" to="/logout">
             <GrLogout />
-            <Link className="" to="/logout">Logout</Link>
+            <span>Logout</span>
+            </Link>
           </li>
           </>
           ) : (
             <>
           <li className="nav-item">
+            <Link className="nav-link" to="/login">
             <GrLogin /> 
-            <Link className="" to="/login">Login</Link>
+            <span>Login</span>
+            </Link>
           </li>
           <li className="nav-item">
+            <Link className="nav-link" to="/signup">
             <GiArchiveRegister />
-            <Link className="" to="/signup">Signup</Link>
+            <span>Signup</span>
+            </Link>
           </li>
           </>
           )}
