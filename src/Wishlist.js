@@ -8,7 +8,7 @@ export default function Wishlist({ jwtToken }) {
   useEffect(() => {
     if (!jwtToken) return;
 
-    fetch("http://"+process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/wishlist", {
+    fetch("https://"+process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/wishlist", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

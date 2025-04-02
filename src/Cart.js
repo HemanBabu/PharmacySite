@@ -4,7 +4,7 @@ export default function Cart({jwtToken}){
   const [products, setProducts] = useState([]);
 
   function fetchProducts(){
-    fetch("http://"+process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/cart",{
+    fetch("https://"+process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/cart",{
       method : "GET",
       headers : {
         "Content-Type" : "application/json",
@@ -22,7 +22,7 @@ export default function Cart({jwtToken}){
     .catch(e => console.log(e));
   }
   function placeOrder(){
-    fetch("http://"+process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/cart/placeorder",{
+    fetch("https://"+process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/cart/placeorder",{
       method : "GET",
       headers : {
         "Content-Type" : "application/json",

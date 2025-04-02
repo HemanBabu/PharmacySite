@@ -11,7 +11,7 @@ export default function Login({ setJwtToken, setUser }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://"+process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/auth/login", {
+      const response = await fetch("https://"+process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user, password }),

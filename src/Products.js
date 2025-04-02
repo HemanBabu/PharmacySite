@@ -12,7 +12,7 @@ export default function Products({ jwtToken, search }) {
 
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`http://${process.env.REACT_APP_SERVER}:${process.env.REACT_APP_PORT}/search/${search}`, {
+        const response = await fetch(`https://${process.env.REACT_APP_SERVER}:${process.env.REACT_APP_PORT}/search/${search}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${jwtToken}`,
