@@ -10,7 +10,7 @@ export default function Card({ product_code, display_name, manufacturer_name, mr
       if(isWished || inCart) navigator("/login");
       return;
     }
-    fetch("https://"+process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/wishlist",{
+    fetch(process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/wishlist",{
       method : isWished ? "POST" : "DELETE",
       headers : {
         "Content-Type" : "application/json",
@@ -21,7 +21,7 @@ export default function Card({ product_code, display_name, manufacturer_name, mr
       })
     });
     
-    fetch("https://"+process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/cart",{
+    fetch(process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/cart",{
       method : inCart ? "POST" : "DELETE",
       headers :{
         "Content-Type" : "application/json",
