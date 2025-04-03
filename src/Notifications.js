@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 export default function Notifications({jwtToken}){
   const [notifications, setNotifications] = useState([]);
   useEffect(()=>{
-    fetch(process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/notifications",{
+    fetch(process.env.REACT_APP_SERVER+"/notifications",{
       method : "GET",
       headers : {
         "Content-Type" : "application/json",

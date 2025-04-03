@@ -6,7 +6,7 @@ export default function Logout({ jwtToken, setJwtToken, setUser }) {
   useEffect(() => {
     const logout = async () => {
       try {
-        const response = await fetch(process.env.REACT_APP_SERVER+":"+process.env.REACT_APP_PORT+"/auth/logout", {
+        const response = await fetch(process.env.REACT_APP_SERVER+"/auth/logout", {
           method: "POST",
           headers: { "Content-Type": "application/json",
             "Authorization" : `Bearer ${jwtToken}`
