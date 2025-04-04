@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
@@ -8,6 +8,9 @@ export default function Login({ setJwtToken, setUser }) {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(()=>{
+      document.title = "Login";
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

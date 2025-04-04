@@ -31,6 +31,7 @@ export default function Cart({jwtToken}){
     }).then(fetchProducts);
   }
   useEffect(()=>{
+    document.title="Checkout"
     fetchProducts();
   }, []);
 

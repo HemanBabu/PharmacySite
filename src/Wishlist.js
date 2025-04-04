@@ -7,7 +7,7 @@ export default function Wishlist({ jwtToken }) {
 
   useEffect(() => {
     if (!jwtToken) return;
-
+    document.title="Wishlist";
     fetch(process.env.REACT_APP_SERVER+"/wishlist", {
       method: "GET",
       headers: {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Signup({ setJwtToken, setUser }) {
@@ -12,8 +12,11 @@ export default function Signup({ setJwtToken, setUser }) {
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.title = "Signup";
+  }, []);
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    /[A-Z]/.test(password) && /[a-z]/.test(password) && /\d/.test(password);
+  /[A-Z]/.test(password) && /[a-z]/.test(password) && /\d/.test(password);
   const isFormValid =
     user &&
     password &&
@@ -24,7 +27,7 @@ export default function Signup({ setJwtToken, setUser }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(process.env.REACT_APP_SERVER+"/auth/signup", {
+      const response = await fetch(process.env.REACT_APP_SERVER + "/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user, password }),
@@ -47,21 +50,21 @@ export default function Signup({ setJwtToken, setUser }) {
 
   return (
     <div className="container login-panel">
-    <form className="mx-auto" onSubmit={handleSubmit} >
-      <label>Username :</label>
-      <input type="text" placeholder="Username" value={user} onChange={(e) => setUsername(e.target.value)} required />
-      <label>Password :</label>
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-      <label>Confirm Password :</label>
-      <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-      <label>Email :</label>
-      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      <label>Phone Number :</label>
-      <input type="text" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} required />
-      <label>Location :</label>
-      <textarea placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)}></textarea>
-      <button type="submit" disabled={!isFormValid}>Sign Up</button>
-    </form>
-  </div>
+      <form className="mx-auto" onSubmit={handleSubmit} >
+        <label>Username :</label>
+        <input type="text" placeholder="Username" value={user} onChange={(e) => setUsername(e.target.value)} required />
+        <label>Password :</label>
+        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <label>Confirm Password :</label>
+        <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+        <label>Email :</label>
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <label>Phone Number :</label>
+        <input type="text" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+        <label>Location :</label>
+        <textarea placeholder="Location" value={location} onChange={(e) => setLocation(e.target.value)}></textarea>
+        <button type="submit" disabled={!isFormValid}>Sign Up</button>
+      </form>
+    </div>
   );
 }

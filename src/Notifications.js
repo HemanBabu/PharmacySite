@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 export default function Notifications({jwtToken}){
   const [notifications, setNotifications] = useState([]);
   useEffect(()=>{
+    document.title = "Notifications";
     fetch(process.env.REACT_APP_SERVER+"/notifications",{
       method : "GET",
       headers : {

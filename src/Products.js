@@ -8,8 +8,9 @@ export default function Products({ jwtToken, search }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!search) return;
 
+    if (!search) return;
+    document.title=search;
     const fetchProducts = async () => {
       try {
         const response = await fetch(`${process.env.REACT_APP_SERVER}/search/${search}`, {
