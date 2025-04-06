@@ -64,7 +64,7 @@ export default function Cart({jwtToken}){
         <tr>
           <td colSpan="3">Total:</td>
           <td>
-            ${products.reduce((total, product) => {
+            ₹{products.reduce((total, product) => {
   return total + product.selling_price * product.count;
 }, 0).toFixed(2)}
           </td>
